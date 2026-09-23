@@ -71,8 +71,10 @@
     /* Kinetic micro-motion and nav indicator */
     header{transition:transform .28s cubic-bezier(.22,.9,.32,1)}
     header.nav-hidden{transform:translateY(-68px)}
-    .nav-indicator{position:absolute;top:6px;height:calc(100% - 12px);background:linear-gradient(90deg,rgba(255,255,255,0.9),rgba(255,255,255,0.7));border-radius:999px;box-shadow:0 4px 18px rgba(15,23,42,0.06);transition:transform .32s cubic-bezier(.22,.9,.32,1),width .32s ease,left .32s ease,opacity .28s}
-    .dark .nav-indicator{background:linear-gradient(90deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))}
+    .nav-indicator{position:absolute;top:6px;height:calc(100% - 12px);border-radius:999px;box-shadow:0 6px 22px rgba(2,6,23,0.06);transition:transform .32s cubic-bezier(.22,.9,.32,1),width .32s ease,left .32s ease,opacity .28s;z-index:2}
+    /* light/dark visible indicator colors */
+    body:not(.dark) .nav-indicator{background:linear-gradient(90deg,rgba(16,185,129,0.12),rgba(16,185,129,0.08));border:1px solid rgba(16,185,129,0.08)}
+    .dark .nav-indicator{background:linear-gradient(90deg,rgba(56,189,248,0.08),rgba(99,102,241,0.04));border:1px solid rgba(255,255,255,0.03)}
     .nav-link{position:relative;z-index:10}
 
     /* Section and content reveal */
@@ -370,8 +372,13 @@
       navIndicator.style.opacity = '1';
     }
 
-    // initial indicator placement
-    setTimeout(()=> moveIndicatorTo(document.querySelector('.nav-link')), 100);
+    // initial indicator placement (on load + resize)
+    function placeInitialIndicator(){
+      const active = document.querySelector('.nav-link');
+      moveIndicatorTo(active);
+    }
+    window.addEventListener('load', placeInitialIndicator);
+    window.addEventListener('resize', () => { setTimeout(placeInitialIndicator, 120); });
 
     // Enhanced scroll spy: determine current section and move indicator
     let lastKnownScrollY = 0;
