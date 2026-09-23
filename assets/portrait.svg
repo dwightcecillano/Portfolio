@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <rect width="100%" height="100%" fill="#f8f6f3"/>
+  <circle cx="120" cy="90" r="60" fill="#e6e3df"/>
+  <rect x="40" y="150" width="160" height="60" rx="8" fill="#e6e3df"/>
+  <text x="120" y="100" font-family="Inter, system-ui, sans-serif" font-size="44" fill="#6b6b6b" text-anchor="middle" alignment-baseline="middle">DC</text>
+</svg>

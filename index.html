@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dwight Joseph Fivecoat Cecillano — Social Media Marketing, AI Specialist & ISA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            serif: ['Instrument Serif', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .font-serif-custom { font-family: 'Instrument Serif', Georgia, serif; }
+    .noise-bg {
+      background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+    .dark .noise-bg {
+      background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+    /* Ambient animated blobs */
+    :root{
+      --blob1: 240 200 180; /* warm cream (rgb values for CSS color-mix) */
+      --blob2: 150 230 215; /* soft teal */
+      --blob3: 130 120 255; /* soft indigo */
+    }
+    .ambient-bg{position:fixed;inset:0;pointer-events:none;z-index:-10;overflow:hidden;contain:paint}
+    .ambient-bg .blob{position:absolute;border-radius:50%;filter:blur(40px);opacity:.36;transform:translateZ(0);will-change:transform,opacity;backface-visibility:hidden;mix-blend-mode:screen}
+    .ambient-bg .blob.small{width:18rem;height:18rem}
+    .ambient-bg .blob.medium{width:26rem;height:26rem}
+    .ambient-bg .blob.large{width:34rem;height:34rem}
+
+    /* Keyframes for slow drifting */
+    @keyframes blobMoveA{0%{transform:translate3d(-10vw,-5vh) scale(1)}50%{transform:translate3d(6vw,6vh) scale(1.08)}100%{transform:translate3d(-10vw,-5vh) scale(1)}}
+    @keyframes blobMoveB{0%{transform:translate3d(20vw,10vh) scale(1)}50%{transform:translate3d(-8vw,-6vh) scale(1.06)}100%{transform:translate3d(20vw,10vh) scale(1)}}
+    @keyframes blobMoveC{0%{transform:translate3d(-5vw,25vh) scale(1)}50%{transform:translate3d(10vw,-10vh) scale(1.04)}100%{transform:translate3d(-5vw,25vh) scale(1)}}
+
+    .ambient-bg .blob.a{left:8%;top:6%;background:radial-gradient(circle at 30% 30%, rgba(var(--blob1),0.92) 0%, rgba(var(--blob1),0.52) 32%, rgba(255,255,255,0) 80%);animation:blobMoveA 20s ease-in-out infinite}
+    .ambient-bg .blob.b{right:6%;top:30%;background:radial-gradient(circle at 60% 40%, rgba(var(--blob2),0.9) 0%, rgba(var(--blob2),0.44) 32%, rgba(255,255,255,0) 80%);animation:blobMoveB 24s ease-in-out infinite}
+    .ambient-bg .blob.c{left:38%;bottom:12%;background:radial-gradient(circle at 40% 60%, rgba(var(--blob3),0.88) 0%, rgba(var(--blob3),0.42) 32%, rgba(255,255,255,0) 80%);animation:blobMoveC 28s ease-in-out infinite}
+
+    /* Dark mode color adjustments */
+    .dark .ambient-bg .blob.a{background:radial-gradient(circle at 30% 30%, rgba(255,236,219,0.12) 0%, rgba(255,236,219,0.06) 30%, rgba(0,0,0,0) 80%)}
+    .dark .ambient-bg .blob.b{background:radial-gradient(circle at 60% 40%, rgba(144,238,226,0.08) 0%, rgba(144,238,226,0.04) 30%, rgba(0,0,0,0) 80%)}
+    .dark .ambient-bg .blob.c{background:radial-gradient(circle at 40% 60%, rgba(150,140,255,0.07) 0%, rgba(150,140,255,0.03) 30%, rgba(0,0,0,0) 80%)}
+
+    /* reduce motion preference */
+    @media (prefers-reduced-motion:reduce){
+      .ambient-bg .blob{animation:none}
+    }
+    /* Pause animations when user is actively scrolling to prevent jank */
+    .is-scrolling .ambient-bg .blob{animation-play-state:paused !important;opacity:.18}
+  </style>
+</head>
+<body class="bg-[#faf8f5] dark:bg-[#0a0a09] text-zinc-900 dark:text-zinc-100 transition-colors duration-300 selection:bg-zinc-900 selection:text-white dark:selection:bg-white dark:selection:text-zinc-900 noise-bg">
+
+  <!-- Ambient animated background layer -->
+  <div class="ambient-bg -z-10">
+    <div class="blob large a" aria-hidden="true"></div>
+    <div class="blob medium b" aria-hidden="true"></div>
+    <div class="blob small c" aria-hidden="true"></div>
+  </div>
+
+  <!-- Floating Minimal Pill Nav -->
+  <header class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
+    <nav class="flex items-center justify-between gap-1 sm:gap-2 px-3 py-1.5 rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm text-xs font-medium text-zinc-600 dark:text-zinc-400">
+      <a href="#hero" class="px-3 py-1.5 rounded-full hover:text-zinc-900 dark:hover:text-white transition nav-link" data-target="hero">Index</a>
+      <a href="#about" class="px-3 py-1.5 rounded-full hover:text-zinc-900 dark:hover:text-white transition nav-link" data-target="about">About</a>
+      <a href="#experience" class="px-3 py-1.5 rounded-full hover:text-zinc-900 dark:hover:text-white transition nav-link" data-target="experience">Experience</a>
+      <a href="#cases" class="px-3 py-1.5 rounded-full hover:text-zinc-900 dark:hover:text-white transition nav-link" data-target="cases">Cases</a>
+      <a href="#stack" class="px-3 py-1.5 rounded-full hover:text-zinc-900 dark:hover:text-white transition nav-link" data-target="stack">Stack</a>
+      <div class="h-3 w-[1px] bg-zinc-200 dark:bg-zinc-800 mx-1"></div>
+      <button id="theme-toggle" class="p-1.5 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition" aria-label="Toggle theme">
+        <i data-lucide="sun" class="w-3.5 h-3.5 hidden dark:block"></i>
+        <i data-lucide="moon" class="w-3.5 h-3.5 block dark:hidden"></i>
+      </button>
+      <a href="#contact" class="px-3.5 py-1.5 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 hover:opacity-90 transition font-medium">Connect</a>
+    </nav>
+  </header>
+
+  <!-- Main Canvas -->
+  <main class="max-w-[720px] mx-auto px-6 pt-40 pb-28 space-y-36">
+
+    <!-- Hero / Index -->
+    <section id="hero" class="space-y-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-200 dark:border-zinc-800 text-[11px] font-mono tracking-wider uppercase text-zinc-500">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        Available for Remote / US Operations & AI Dev
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+        <div class="md:col-span-2 space-y-4">
+          <h1 class="font-serif-custom text-5xl sm:text-6xl md:text-7xl font-normal tracking-tight leading-[1.02]">
+            Dwight Cecillano <span class="italic text-zinc-400 dark:text-zinc-500">— systems, voice AI & ISA execution.</span>
+          </h1>
+          <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 font-light leading-relaxed max-w-xl">
+            Versatile Virtual Assistant adept in web dev, AI automation & development, cold calling, marketing, telecommunications, and entrepreneurship.
+          </p>
+        </div>
+        <div class="flex justify-center md:justify-end">
+          <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-white dark:border-zinc-900 shadow-lg">
+            <img src="picweb.jpg" alt="Dwight Cecillano portrait" class="w-full h-full object-cover" loading="lazy" width="112" height="112">
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 text-xs font-mono text-zinc-500 pt-2">
+        <a href="#contact" class="group inline-flex items-center gap-2 text-zinc-900 dark:text-zinc-100 font-medium hover:underline">
+          Start a conversation 
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+        </a>
+        <span>•</span>
+        <span>QC, Philippines (PHT / US Friendly)</span>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="space-y-6 pt-16 border-t border-zinc-200/80 dark:border-zinc-800/80">
+      <span class="text-[11px] font-mono tracking-widest uppercase text-zinc-400">01 // Profile</span>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        <div class="md:col-span-2 space-y-4 text-zinc-700 dark:text-zinc-300 font-light leading-relaxed">
+          <p>
+            Demonstrated proficiency in delivering high-quality services across diverse projects, leveraging strong communication, technical, and strategic abilities. I bridge conversational real estate qualifying with clean backend Python/Streamlit/Retell infrastructure.
+          </p>
+          <p class="text-sm text-zinc-500 font-mono">
+            Verified Record: Certified true and correct representation of multi-campaign telecommunications, outbound ISA lead management, and automated client onboarding infrastructure.
+          </p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/70 dark:bg-zinc-900/60 backdrop-blur-xl border border-zinc-200/60 dark:border-zinc-800/60 space-y-3 text-xs font-mono">
+          <span class="text-zinc-400 block">REFERENCE</span>
+          <p class="font-medium text-zinc-900 dark:text-zinc-100">Paul B. Polintan LPT, MAEd</p>
+          <p class="text-zinc-500">School Principal</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section id="experience" class="space-y-10 pt-16 border-t border-zinc-200/80 dark:border-zinc-800/80">
+      <div class="flex items-baseline justify-between">
+        <span class="text-[11px] font-mono tracking-widest uppercase text-zinc-400">02 // Experience Chronology</span>
+        <span class="text-xs font-mono text-zinc-400">2024 — 2026</span>
+      </div>
+      <div class="space-y-8">
+        <!-- Item -->
+        <article class="group relative pl-6 border-l border-zinc-200 dark:border-zinc-800 hover:border-zinc-900 dark:hover:border-zinc-100 transition-colors space-y-1.5">
+          <span class="text-xs font-mono text-zinc-400 block">June 10, 2026 – Sept 21, 2026</span>
+          <h3 class="text-base font-medium text-zinc-900 dark:text-zinc-100">Inside Sales Agent (ISA) — Lake Michigan Realty Management</h3>
+          <p class="text-xs font-mono text-zinc-500">Client: Javier Rodriguez</p>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 font-light pt-1">Real estate inbound & outbound calls, lead qualifying, weekly ISA mastermind, weekly team reporting.</p>
+        </article>
+
+        <!-- Item -->
+        <article class="group relative pl-6 border-l border-zinc-200 dark:border-zinc-800 hover:border-zinc-900 dark:hover:border-zinc-100 transition-colors space-y-1.5">
+          <span class="text-xs font-mono text-zinc-400 block">Feb 2, 2026 – May 29, 2026</span>
+          <h3 class="text-base font-medium text-zinc-900 dark:text-zinc-100">AI Specialist & Social Media Marketing — RCVA & Ralbotech</h3>
+          <p class="text-xs font-mono text-zinc-500">Client: Bob Beal</p>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 font-light pt-1">Website development, AI automation, Retell AI developer, recruitment, client onboarding.</p>
+        </article>
+
+        <!-- Item -->
+        <article class="group relative pl-6 border-l border-zinc-200 dark:border-zinc-800 hover:border-zinc-900 dark:hover:border-zinc-100 transition-colors space-y-1.5">
+          <span class="text-xs font-mono text-zinc-400 block">Dec 8, 2025 – Jan 29, 2026</span>
+          <h3 class="text-base font-medium text-zinc-900 dark:text-zinc-100">Inside Sales Agent (ISA) — Dorman Homes</h3>
+          <p class="text-xs font-mono text-zinc-500">Client: Dani Dorman</p>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 font-light pt-1">Real estate outbound calls, qualifying leads, lead management, team reporting.</p>
+        </article>
+
+        <!-- Item -->
+        <article class="group relative pl-6 border-l border-zinc-200 dark:border-zinc-800 hover:border-zinc-900 dark:hover:border-zinc-100 transition-colors space-y-1.5">
+          <span class="text-xs font-mono text-zinc-400 block">Sept 2025 – Oct 2025</span>
+          <h3 class="text-base font-medium text-zinc-900 dark:text-zinc-100">Real Estate Cold Caller — HomeBuyerArizona.com</h3>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 font-light pt-1">Real estate inbound & outbound calls, call tracking voicemails, lead management, weekly team reporting.</p>
+        </article>
+
+        <!-- Item -->
+        <article class="group relative pl-6 border-l border-zinc-200 dark:border-zinc-800 hover:border-zinc-900 dark:hover:border-zinc-100 transition-colors space-y-1.5">
+          <span class="text-xs font-mono text-zinc-400 block">March 2025 – June 2025</span>
+          <h3 class="text-base font-medium text-zinc-900 dark:text-zinc-100">Real Estate Cold Caller — Penn Buyers LLC</h3>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 font-light pt-1">Real estate inbound & outbound calls, callbacks, call tracking voicemails, lead management, weekly team reporting.</p>
+        </article>
+
+        <!-- Item -->
+        <article class="group relative pl-6 border-l border-zinc-200 dark:border-zinc-800 hover:border-zinc-900 dark:hover:border-zinc-100 transition-colors space-y-1.5">
+          <span class="text-xs font-mono text-zinc-400 block">Sept 2024 – January 2025</span>
+          <h3 class="text-base font-medium text-zinc-900 dark:text-zinc-100">Real Estate Cold Caller — Matt Buys Houses</h3>
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 font-light pt-1">Real estate inbound & outbound calls, callbacks, call tracking voicemails, lead management, weekly team reporting.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Social & Marketing Case Studies with Snippets/Screenshots -->
+    <section id="cases" class="space-y-8 pt-16 border-t border-zinc-200/80 dark:border-zinc-800/80">
+      <span class="text-[11px] font-mono tracking-widest uppercase text-zinc-400">03 // Social Media & Marketing Execution</span>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <!-- Card 1: Dani Dorman -->
+        <div class="p-6 rounded-2xl bg-white/70 dark:bg-zinc-900/60 backdrop-blur-xl border border-zinc-200/60 dark:border-zinc-800/60 space-y-4">
+          <div class="space-y-1.5">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-zinc-400">Instagram • Acquisition</span>
+            <h3 class="text-lg font-medium">Dani Dorman Real Estate</h3>
+            <p class="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+              Translated property acquisition authority into targeted Instagram visual touchpoints, market highlight cards, and buyer-intent caption sequencing synchronized with outbound phone cadence.
+            </p>
+          </div>
+          <!-- Snippet / Screenshot Visual Container -->
+          <div class="rounded-xl overflow-hidden border border-zinc-200/60 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-950/50 aspect-[4/3] flex flex-col justify-end p-4 relative group min-h-[180px]">
+            <img src="275207ed-b2f3-40e6-a8a1-9b53f57b24aa.jpg" alt="Dani Dorman Real Estate Campaign Snippet" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" loading="lazy" width="800" height="600">
+            <div class="relative z-10 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md p-3 rounded-lg border border-zinc-200/50 dark:border-zinc-800/50 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 block font-medium">Campaign Snapshot</span>
+                <span class="text-xs font-semibold text-zinc-900 dark:text-zinc-100">Holiday Promo & Market Cards</span>
+              </div>
+              <span class="text-[10px] font-mono text-zinc-400">Nov 2025</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: BobIsThePlumber / Trade -->
+        <div class="p-6 rounded-2xl bg-white/70 dark:bg-zinc-900/60 backdrop-blur-xl border border-zinc-200/60 dark:border-zinc-800/60 space-y-4">
+          <div class="space-y-1.5">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-zinc-400">Instagram • Local Trade</span>
+            <h3 class="text-lg font-medium">BobIsThePlumber</h3>
+            <p class="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed">
+              Constructed service-authority trust blocks, fix-breakdown carousel architecture, and DM inquiry capture hooks designed for immediate regional trade response conversion.
+            </p>
+          </div>
+          <!-- Snippet / Screenshot Visual Container -->
+          <div class="rounded-xl overflow-hidden border border-zinc-200/60 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-950/50 aspect-[4/3] flex flex-col justify-end p-4 relative group min-h-[180px]">
+            <img src="8838d9ff-3261-4a3f-8c77-935f19e2177c.jpg" alt="BobIsThePlumber Trade Authority Snippet" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" loading="lazy" width="800" height="600">
+            <div class="relative z-10 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md p-3 rounded-lg border border-zinc-200/50 dark:border-zinc-800/50 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 block font-medium">Campaign Snapshot</span>
+                <span class="text-xs font-semibold text-zinc-900 dark:text-zinc-100">Fix-Breakdown Carousel & DMs</span>
+              </div>
+              <span class="text-[10px] font-mono text-zinc-400">Trade Lead Gen</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical & Operational Tool Stack -->
+    <section id="stack" class="space-y-8 pt-16 border-t border-zinc-200/80 dark:border-zinc-800/80">
+      <span class="text-[11px] font-mono tracking-widest uppercase text-zinc-400">04 // Operational & Technical Stack</span>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
+        <div class="p-4 rounded-xl bg-white/60 dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/50 space-y-1.5">
+          <span class="text-zinc-400 block">REAL ESTATE & CRM</span>
+          <p class="text-zinc-800 dark:text-zinc-200">Follow-up Boss, Go High Level, Podio, Ylopo, Flex MLS, Propelio, Mojo Dialer, Zillow</p>
+        </div>
+        <div class="p-4 rounded-xl bg-white/60 dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/50 space-y-1.5">
+          <span class="text-zinc-400 block">TELECOM & DIALING</span>
+          <p class="text-zinc-800 dark:text-zinc-200">Call Tools, Grasshopper, Google Voice</p>
+        </div>
+        <div class="p-4 rounded-xl bg-white/60 dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/50 space-y-1.5">
+          <span class="text-zinc-400 block">AI & AUTOMATION</span>
+          <p class="text-zinc-800 dark:text-zinc-200">Retell AI Developer, Claude, Zapier, Streamlit</p>
+        </div>
+        <div class="p-4 rounded-xl bg-white/60 dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/50 space-y-1.5">
+          <span class="text-zinc-400 block">SOFTWARE DEV</span>
+          <p class="text-zinc-800 dark:text-zinc-200">VSCode, GitHub, Railway, Oracle</p>
+        </div>
+        <div class="p-4 rounded-xl bg-white/60 dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/50 space-y-1.5">
+          <span class="text-zinc-400 block">COMMUNICATION</span>
+          <p class="text-zinc-800 dark:text-zinc-200">Google Workspace, Slack, WhatsApp, Skype, Zoom, Google Meet</p>
+        </div>
+        <div class="p-4 rounded-xl bg-white/60 dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/50 space-y-1.5">
+          <span class="text-zinc-400 block">PRODUCTIVITY & DESIGN</span>
+          <p class="text-zinc-800 dark:text-zinc-200">Microsoft Office, Hubstaff, Canva</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / CTA -->
+    <section id="contact" class="space-y-8 pt-16 border-t border-zinc-200/80 dark:border-zinc-800/80">
+      <span class="text-[11px] font-mono tracking-widest uppercase text-zinc-400">05 // Contact</span>
+      <div class="space-y-4">
+        <h2 class="font-serif-custom text-4xl sm:text-5xl tracking-tight">Let's build calm precision into your pipeline.</h2>
+        <p class="text-zinc-600 dark:text-zinc-400 font-light text-sm max-w-md">
+          Inviting partnerships for collective growth. Direct outreach for high-intent ISA execution or Retell AI/web deployment.
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-4 pt-2">
+        <a href="mailto:dwight.cecillano@example.com" class="px-6 py-3 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 text-xs font-medium tracking-wide hover:opacity-90 transition">
+          cecillano.dwight@gmail.com
+        </a>
+        <button id="copy-email" class="px-5 py-3 rounded-full border border-zinc-300 dark:border-zinc-700 text-xs font-mono text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition flex items-center gap-2">
+          <span>Copy email</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="max-w-[720px] mx-auto px-6 py-12 border-t border-zinc-200/60 dark:border-zinc-800/60 flex items-center justify-between text-xs font-mono text-zinc-400">
+    <span>DWIGHT CECILLANO</span>
+    <span>QUEZON CITY, PH</span>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+    });
+
+    // Copy email interaction
+    const copyBtn = document.getElementById('copy-email');
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('dwight.cecillano@example.com');
+      const span = copyBtn.querySelector('span');
+      const orig = span.textContent;
+      span.textContent = 'Copied!';
+      setTimeout(() => span.textContent = orig, 2000);
+    });
+
+    // Smooth scroll spy for pill navigation highlight
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = ['hero', 'about', 'experience', 'cases', 'stack', 'contact'].map(id => document.getElementById(id));
+    
+    window.addEventListener('scroll', () => {
+      let current = 'hero';
+      sections.forEach(sec => {
+        if (sec && window.scrollY >= sec.offsetTop - 120) {
+          current = sec.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('text-zinc-900', 'dark:text-white', 'bg-zinc-100', 'dark:bg-zinc-800/60');
+        if (link.getAttribute('data-target') === current) {
+          link.classList.add('text-zinc-900', 'dark:text-white', 'bg-zinc-100', 'dark:bg-zinc-800/60');
+        }
+      });
+    });
+
+    // Image load helpers: try alternate extensions only on error and show visible fallback when missing
+    function tryAlternateSources(img) {
+      const src = img.getAttribute('src') || '';
+      if (!src.startsWith('assets/')) return img.classList.remove('opacity-0');
+      const base = src.replace(/\.(svg|png|jpg|jpeg|gif)$/i, '');
+      const extensions = ['.svg', '.png', '.jpg', '.jpeg', '.gif'];
+      const candidates = extensions.map(ext => base + ext);
+      // remove duplicates and the current src from candidates to avoid immediate overwrite
+      const filtered = candidates.filter(c => c !== src);
+      let idx = 0;
+
+      function onError() {
+        if (idx >= filtered.length) {
+          img.removeEventListener('error', onError);
+          showImageFallback(img, base);
+          return;
+        }
+        img.src = filtered[idx++];
+      }
+
+      img.addEventListener('error', onError);
+      img.addEventListener('load', () => {
+        img.classList.remove('opacity-0');
+        img.removeEventListener('error', onError);
+      });
+      // Ensure browser attempts original source first (don't overwrite it here)
+      img.src = src;
+    }
+
+    function showImageFallback(img, base) {
+      const container = img.closest('.group') || img.parentElement;
+      if (!container) return;
+      container.classList.add('bg-red-50');
+      const notice = document.createElement('div');
+      notice.className = 'absolute inset-0 flex items-center justify-center text-xs text-red-600 bg-white/80';
+      notice.style.pointerEvents = 'none';
+      notice.textContent = 'Image not found: ' + base.split('/').pop();
+      container.appendChild(notice);
+    }
+
+    // Run on DOMContentLoaded to set up handlers for local assets
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('img').forEach(img => {
+        // hide initially until loaded to avoid flicker
+        img.classList.add('opacity-0');
+        tryAlternateSources(img);
+      });
+    });
+
+    // Pause ambient animations briefly while user scrolls to avoid jank
+    (function(){
+      let scrollTimer = null;
+      const onScroll = () => {
+        document.documentElement.classList.add('is-scrolling');
+        if (scrollTimer) cancelAnimationFrame(scrollTimer);
+        // resume animations 170ms after last scroll frame
+        scrollTimer = requestAnimationFrame(() => {
+          if (window._scrollResumeTimeout) clearTimeout(window._scrollResumeTimeout);
+          window._scrollResumeTimeout = setTimeout(() => {
+            document.documentElement.classList.remove('is-scrolling');
+          }, 170);
+        });
+      };
+      window.addEventListener('scroll', onScroll, {passive:true});
+    })();
+  </script>
+</body>
+</html>
+
+```
