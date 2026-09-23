@@ -40,8 +40,9 @@
       --blob2: 150 230 215; /* soft teal */
       --blob3: 130 120 255; /* soft indigo */
     }
-    .ambient-bg{position:fixed;inset:0;pointer-events:none;z-index:-10;overflow:hidden;contain:paint}
-    .ambient-bg .blob{position:absolute;border-radius:50%;filter:blur(40px);opacity:.36;transform:translateZ(0);will-change:transform,opacity;backface-visibility:hidden;mix-blend-mode:screen}
+    .ambient-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;contain:paint}
+    /* Default: use multiply on light backgrounds so blobs are visible; switch to screen in dark mode below */
+    .ambient-bg .blob{position:absolute;border-radius:50%;filter:blur(36px);opacity:.42;transform:translateZ(0);will-change:transform,opacity;backface-visibility:hidden;mix-blend-mode:multiply}
     .ambient-bg .blob.small{width:18rem;height:18rem}
     .ambient-bg .blob.medium{width:26rem;height:26rem}
     .ambient-bg .blob.large{width:34rem;height:34rem}
@@ -56,6 +57,7 @@
     .ambient-bg .blob.c{left:38%;bottom:12%;background:radial-gradient(circle at 40% 60%, rgba(var(--blob3),0.88) 0%, rgba(var(--blob3),0.42) 32%, rgba(255,255,255,0) 80%);animation:blobMoveC 28s ease-in-out infinite}
 
     /* Dark mode color adjustments */
+    .dark .ambient-bg .blob{mix-blend-mode:screen;opacity:.28}
     .dark .ambient-bg .blob.a{background:radial-gradient(circle at 30% 30%, rgba(255,236,219,0.12) 0%, rgba(255,236,219,0.06) 30%, rgba(0,0,0,0) 80%)}
     .dark .ambient-bg .blob.b{background:radial-gradient(circle at 60% 40%, rgba(144,238,226,0.08) 0%, rgba(144,238,226,0.04) 30%, rgba(0,0,0,0) 80%)}
     .dark .ambient-bg .blob.c{background:radial-gradient(circle at 40% 60%, rgba(150,140,255,0.07) 0%, rgba(150,140,255,0.03) 30%, rgba(0,0,0,0) 80%)}
@@ -71,7 +73,7 @@
 <body class="bg-[#faf8f5] dark:bg-[#0a0a09] text-zinc-900 dark:text-zinc-100 transition-colors duration-300 selection:bg-zinc-900 selection:text-white dark:selection:bg-white dark:selection:text-zinc-900 noise-bg">
 
   <!-- Ambient animated background layer -->
-  <div class="ambient-bg -z-10">
+  <div class="ambient-bg">
     <div class="blob large a" aria-hidden="true"></div>
     <div class="blob medium b" aria-hidden="true"></div>
     <div class="blob small c" aria-hidden="true"></div>
