@@ -91,6 +91,12 @@
     @media (prefers-reduced-motion:reduce){
       .nav-indicator,.reveal,.timeline-item,.case-card img{transition:none !important}
     }
+
+    /* One-time demo micro-motion (brief) to show nav and portrait are active */
+    @keyframes indicatorPulse{0%{transform:scaleX(.96)}50%{transform:scaleX(1.06)}100%{transform:scaleX(1)}}
+    @keyframes portraitPop{0%{transform:translateY(8px) scale(.98)}50%{transform:translateY(-4px) scale(1.03)}100%{transform:translateY(0) scale(1)}}
+    .demo-animate .nav-indicator{animation:indicatorPulse .85s ease both}
+    .demo-animate .hero-portrait{animation:portraitPop .9s cubic-bezier(.2,.9,.32,1) both}
   </style>
 </head>
 <body class="bg-[#faf8f5] dark:bg-[#0a0a09] text-zinc-900 dark:text-zinc-100 transition-colors duration-300 selection:bg-zinc-900 selection:text-white dark:selection:bg-white dark:selection:text-zinc-900 noise-bg">
@@ -139,7 +145,7 @@
           </p>
         </div>
         <div class="flex justify-center md:justify-end">
-          <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-white dark:border-zinc-900 shadow-lg">
+          <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-white dark:border-zinc-900 shadow-lg hero-portrait">
             <img src="picweb.jpg" alt="Dwight Cecillano portrait" class="w-full h-full object-cover" loading="lazy" width="112" height="112">
           </div>
         </div>
@@ -379,6 +385,21 @@
     }
     window.addEventListener('load', placeInitialIndicator);
     window.addEventListener('resize', () => { setTimeout(placeInitialIndicator, 120); });
+
+    // One-time demo to visually confirm micro-motion and indicator
+    function runOneTimeDemo(){
+      try{
+        document.documentElement.classList.add('demo-animate');
+        // ensure indicator aligns to current active link during demo
+        placeInitialIndicator();
+        setTimeout(()=>{
+          document.documentElement.classList.remove('demo-animate');
+          placeInitialIndicator();
+        }, 1200);
+      }catch(e){ /* ignore errors */ }
+    }
+    // trigger demo shortly after load so layout stabilizes
+    window.addEventListener('load', () => { setTimeout(runOneTimeDemo, 280); });
 
     // Enhanced scroll spy: determine current section and move indicator
     let lastKnownScrollY = 0;
