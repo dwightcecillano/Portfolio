@@ -68,6 +68,27 @@
     }
     /* Pause animations when user is actively scrolling to prevent jank */
     .is-scrolling .ambient-bg .blob{animation-play-state:paused !important;opacity:.18}
+    /* Kinetic micro-motion and nav indicator */
+    header{transition:transform .28s cubic-bezier(.22,.9,.32,1)}
+    header.nav-hidden{transform:translateY(-68px)}
+    .nav-indicator{position:absolute;top:6px;height:calc(100% - 12px);background:linear-gradient(90deg,rgba(255,255,255,0.9),rgba(255,255,255,0.7));border-radius:999px;box-shadow:0 4px 18px rgba(15,23,42,0.06);transition:transform .32s cubic-bezier(.22,.9,.32,1),width .32s ease,left .32s ease,opacity .28s}
+    .dark .nav-indicator{background:linear-gradient(90deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))}
+    .nav-link{position:relative;z-index:10}
+
+    /* Section and content reveal */
+    .reveal{opacity:0;transform:translateY(6px);transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .5s ease}
+    .reveal.in-view{opacity:1;transform:none}
+
+    /* Timeline items sliding */
+    .timeline-item{opacity:0;transform:translateX(-12px);transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .45s ease}
+    .timeline-item.in-view{opacity:1;transform:translateX(0)}
+
+    /* Case cards parallax container */
+    .case-card{transform:translateZ(0);will-change:transform}
+    .case-card img, .case-card svg{transition:transform .2s linear}
+    @media (prefers-reduced-motion:reduce){
+      .nav-indicator,.reveal,.timeline-item,.case-card img{transition:none !important}
+    }
   </style>
 </head>
 <body class="bg-[#faf8f5] dark:bg-[#0a0a09] text-zinc-900 dark:text-zinc-100 transition-colors duration-300 selection:bg-zinc-900 selection:text-white dark:selection:bg-white dark:selection:text-zinc-900 noise-bg">
@@ -81,7 +102,8 @@
 
   <!-- Floating Minimal Pill Nav -->
   <header class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
-    <nav class="flex items-center justify-between gap-1 sm:gap-2 px-3 py-1.5 rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm text-xs font-medium text-zinc-600 dark:text-zinc-400">
+    <nav id="floating-nav" class="relative flex items-center justify-between gap-1 sm:gap-2 px-3 py-1.5 rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm text-xs font-medium text-zinc-600 dark:text-zinc-400">
+      <div id="nav-indicator" class="nav-indicator" aria-hidden="true" style="opacity:.9"></div>
       <a href="#hero" class="px-3 py-1.5 rounded-full hover:text-zinc-900 dark:hover:text-white transition nav-link" data-target="hero">Index</a>
       <a href="#about" class="px-3 py-1.5 rounded-full hover:text-zinc-900 dark:hover:text-white transition nav-link" data-target="about">About</a>
       <a href="#experience" class="px-3 py-1.5 rounded-full hover:text-zinc-900 dark:hover:text-white transition nav-link" data-target="experience">Experience</a>
@@ -217,9 +239,9 @@
               Translated property acquisition authority into targeted Instagram visual touchpoints, market highlight cards, and buyer-intent caption sequencing synchronized with outbound phone cadence.
             </p>
           </div>
-          <!-- Snippet / Screenshot Visual Container -->
-          <div class="rounded-xl overflow-hidden border border-zinc-200/60 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-950/50 aspect-[4/3] flex flex-col justify-end p-4 relative group min-h-[180px]">
-            <img src="275207ed-b2f3-40e6-a8a1-9b53f57b24aa.jpg" alt="Dani Dorman Real Estate Campaign Snippet" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" loading="lazy" width="800" height="600">
+            <!-- Snippet / Screenshot Visual Container -->
+            <div class="rounded-xl overflow-hidden border border-zinc-200/60 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-950/50 aspect-[4/3] flex flex-col justify-end p-4 relative group min-h-[180px] case-card">
+              <img src="275207ed-b2f3-40e6-a8a1-9b53f57b24aa.jpg" alt="Dani Dorman Real Estate Campaign Snippet" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" loading="lazy" width="800" height="600">
             <div class="relative z-10 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md p-3 rounded-lg border border-zinc-200/50 dark:border-zinc-800/50 flex items-center justify-between">
               <div>
                 <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 block font-medium">Campaign Snapshot</span>
@@ -240,7 +262,7 @@
             </p>
           </div>
           <!-- Snippet / Screenshot Visual Container -->
-          <div class="rounded-xl overflow-hidden border border-zinc-200/60 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-950/50 aspect-[4/3] flex flex-col justify-end p-4 relative group min-h-[180px]">
+          <div class="rounded-xl overflow-hidden border border-zinc-200/60 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-950/50 aspect-[4/3] flex flex-col justify-end p-4 relative group min-h-[180px] case-card">
             <img src="8838d9ff-3261-4a3f-8c77-935f19e2177c.jpg" alt="BobIsThePlumber Trade Authority Snippet" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" loading="lazy" width="800" height="600">
             <div class="relative z-10 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md p-3 rounded-lg border border-zinc-200/50 dark:border-zinc-800/50 flex items-center justify-between">
               <div>
@@ -332,22 +354,56 @@
 
     // Smooth scroll spy for pill navigation highlight
     const navLinks = document.querySelectorAll('.nav-link');
+    const navIndicator = document.getElementById('nav-indicator');
+    const navContainer = document.getElementById('floating-nav');
     const sections = ['hero', 'about', 'experience', 'cases', 'stack', 'contact'].map(id => document.getElementById(id));
-    
-    window.addEventListener('scroll', () => {
+
+    // Move indicator to active link smoothly
+    function moveIndicatorTo(link){
+      if(!link) { navIndicator.style.opacity = '0'; return; }
+      const rect = link.getBoundingClientRect();
+      const containerRect = navContainer.getBoundingClientRect();
+      const left = rect.left - containerRect.left + 4; // small inset
+      const width = rect.width - 8;
+      navIndicator.style.left = left + 'px';
+      navIndicator.style.width = width + 'px';
+      navIndicator.style.opacity = '1';
+    }
+
+    // initial indicator placement
+    setTimeout(()=> moveIndicatorTo(document.querySelector('.nav-link')), 100);
+
+    // Enhanced scroll spy: determine current section and move indicator
+    let lastKnownScrollY = 0;
+    function updateActiveNav(){
       let current = 'hero';
       sections.forEach(sec => {
-        if (sec && window.scrollY >= sec.offsetTop - 120) {
-          current = sec.getAttribute('id');
-        }
+        if (sec && window.scrollY >= sec.offsetTop - 120) current = sec.getAttribute('id');
       });
       navLinks.forEach(link => {
         link.classList.remove('text-zinc-900', 'dark:text-white', 'bg-zinc-100', 'dark:bg-zinc-800/60');
         if (link.getAttribute('data-target') === current) {
           link.classList.add('text-zinc-900', 'dark:text-white', 'bg-zinc-100', 'dark:bg-zinc-800/60');
+          moveIndicatorTo(link);
         }
       });
-    });
+    }
+
+    window.addEventListener('scroll', () => {
+      lastKnownScrollY = window.scrollY;
+    }, {passive:true});
+
+    // rAF loop to update nav and other scroll-driven motion smoothly
+    (function rafLoop(){
+      // nav hide on down show on up
+      const current = window.scrollY;
+      if (typeof rafLoop.lastY === 'undefined') rafLoop.lastY = current;
+      if (current > rafLoop.lastY + 6) document.querySelector('header').classList.add('nav-hidden');
+      else if (current < rafLoop.lastY - 6) document.querySelector('header').classList.remove('nav-hidden');
+      rafLoop.lastY = current;
+      updateActiveNav();
+      requestAnimationFrame(rafLoop);
+    })();
 
     // Image load helpers: try alternate extensions only on error and show visible fallback when missing
     function tryAlternateSources(img) {
@@ -396,6 +452,37 @@
         img.classList.add('opacity-0');
         tryAlternateSources(img);
       });
+      // Set up IntersectionObserver for reveals
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            e.target.classList.add('in-view');
+          }
+        });
+      },{threshold:0.15});
+
+      document.querySelectorAll('#hero .space-y-4, #about .space-y-4, #stack, #contact, #cases').forEach(el => el.classList.add('reveal'));
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+      // Timeline items
+      document.querySelectorAll('article.group').forEach(node=>{
+        node.classList.add('timeline-item');
+        revealObserver.observe(node);
+      });
+
+      // Case cards parallax via intersection ratio
+      const caseCards = document.querySelectorAll('.case-card');
+      const parObserver = new IntersectionObserver((entries)=>{
+        entries.forEach(en=>{
+          const img = en.target.querySelector('img, svg');
+          if(!img) return;
+          const ratio = en.intersectionRatio;
+          // translateY small amount to create depth (more visible when center of viewport)
+          const y = (0.5 - ratio) * 18; // range approx -9..9
+          img.style.transform = `translateY(${y}px) scale(${1 + (ratio-0.5)*0.02})`;
+        });
+      },{threshold:[0,0.25,0.5,0.75,1]});
+      caseCards.forEach(c=> parObserver.observe(c));
     });
 
     // Pause ambient animations briefly while user scrolls to avoid jank
